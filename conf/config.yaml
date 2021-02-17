@@ -1,0 +1,132 @@
+cuda: 0
+execution: 3
+evolution:
+  max_generations: 100
+  train_best_generations: 50
+  elitism: 0.0
+  tournament_size: 2
+  max_layers: 5
+  sequential_layers: false
+  add_layer_prob: 0.3
+  rm_layer_prob: 0.1
+  gene_mutation_prob: 0.1
+  mutate_gan_type_prob: 0
+  crossover_rate: 0.0
+  freeze_when_change: false
+  control_number_layers: false
+  freeze_best: false
+  dynamic_shape: false
+  min_div_scale: 8
+  algorithm: NEAT
+  adjust_learning_rate: false
+  nslc:
+    archive_prob: 0.1
+    neighbors_size: all
+  evaluation:
+    type: all-vs-all
+    mix_adversaries: false
+    best_size: 2
+    same_batches: false
+    iterations: 1
+    initialize_all: true
+    reset_optimizer: false
+    clone_adversarial: false
+  speciation:
+    size: 2
+    keep_best: true
+    threshold: 1
+    distance: num_genes
+  fitness:
+    discriminator: loss_rasgan
+    generator: loss_rasgan
+    fid_true_sample_size: 10000
+    fid_sample_size: 10000
+    fid_dimension: 2048
+    fid_batch_size: 50
+    evaluation_batches: 1
+    skill_rating:
+      tau: 0.3
+      sigma: 0.06
+gan:
+  dataset: FashionMNIST
+  dataset_resize: null
+  dataset_classes: null
+  batches_limit: 50
+  batch_size: 64
+  data_loader_workers: 5
+  critic_iterations: 1
+  generator_iterations: 1
+  possible_gan_types:
+  - gan
+  - wgan
+  - lsgan
+  - rsgan
+  - rasgan
+  - hinge
+  type: rasgan
+  label_smoothing: false
+  normalization:
+  - none
+  - batch
+  - spectral
+  use_wscale: false
+  use_minibatch_stddev: false
+  dropout: false
+  latent_dim: 128
+  discriminator:
+    population_size: 5
+    fixed: false
+    use_gradient_penalty: false
+    gradient_penalty_lambda: 10
+    possible_layers:
+    - Conv2d
+    optimizer:
+      type: RMSprop
+      copy_optimizer_state: false
+      learning_rate: 0.0002
+      weight_decay: 0
+  generator:
+    population_size: 5
+    fixed: false
+    possible_layers:
+    - Deconv2d
+    - Deconv2dUpsample
+    optimizer:
+      type: RMSprop
+      copy_optimizer_state: false
+      learning_rate: 0.0002
+      weight_decay: 0
+layer:
+  keep_weights: true
+  resize_weights: true
+  resize_linear_weights: true
+  activation_functions:
+  - ReLU
+  linear:
+    min_features_power: 6
+    max_features_power: 13
+  conv2d:
+    min_channels_power: 6
+    max_channels_power: 8
+    random_out_channels: true
+    kernel_size: 3
+    force_double: false
+    enable_skip_conn: false
+    stride: 2
+  deconv2d:
+    use_upsample: false
+    enable_skip_conn: false
+  upsample:
+    limit_output_size: true
+stats:
+  num_generated_samples: 36
+  print_interval: 1
+  calc_inception_score: false
+  calc_fid_score: false
+  calc_fid_score_best: true
+  calc_rmse_score: false
+  calc_skill_rating: false
+  save_best_model: true
+  save_best_interval: 5
+  notify: false
+  min_notification_interval: 30
